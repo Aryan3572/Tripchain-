@@ -8,35 +8,24 @@ datasource db {
 }
 
 model User {
-  id              Int              @id @default(autoincrement())
-  uuid            String           @unique
-  email           String           @unique
-  password        String
-  trips           Trip[]
-  dailyTripChains DailyTripChain[] // Added relation to fix error
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  trips     Trip[]
+  createdAt DateTime @default(now())
 }
 
 model Trip {
-  id          Int      @id @default(autoincrement())
-  userId      Int
-  origin      String
-  destination String
-  mode        String
-  purpose     String
-  companions  String? // optional
-  startTime   DateTime
-  endTime     DateTime
-  createdAt   DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id])
-}
-
-model DailyTripChain {
   id        Int      @id @default(autoincrement())
   userId    Int
+  from      String
+  to        String
+  mode      String
+  distance  Float
+  duration  Int
+  cost      Float?
   date      DateTime
-  trips     String // JSON or list of trip IDs
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id])
 }
