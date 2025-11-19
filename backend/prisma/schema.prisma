@@ -14,6 +14,10 @@ model User {
   password  String
   createdAt DateTime @default(now())
   trips     Trip[]
+
+  badges       UserBadge[]
+  tripPatterns TripPattern[]
+  goals        Goal[]
 }
 
 model Trip {
@@ -29,5 +33,51 @@ model Trip {
   date      DateTime
   createdAt DateTime @default(now())
 
-  user      User     @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+}
+
+model UserBadge {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  name        String
+  description String
+  icon        String
+  achievedAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model TripPattern {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  from         String
+  to           String
+  count        Int
+  avgDistance  Float
+  avgDuration  Float
+  lastDetected DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Goal {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  title     String
+  type      String // e.g. "eco", "distance", "active_travel"
+  target    Float? // e.g. 100 (km) or 10 trips etc.
+  unit      String? // e.g. "km", "trips", "score"
+  period    String? // e.g. "weekly", "monthly"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Badge {
+  id          Int         @id @default(autoincrement())
+  code        String      @unique // e.g. "FIRST_TRIP"
+  title       String
+  description String
+  icon        String?     // could be emoji or icon name
 }

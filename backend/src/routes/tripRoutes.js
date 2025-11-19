@@ -1,15 +1,23 @@
-// src/routes/tripRoutes.js
 import express from "express";
 import { addTrip, getTrips, getTripSummary } from "../controllers/tripController.js";
+import { filterTrips } from "../controllers/tripFilterController.js";
+import { deleteAllTrips } from "../controllers/tripDeleteController.js";
+import { exportTrips } from "../controllers/tripExportController.js";
 import { authenticate } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// All trip routes require auth
+// All routes require authentication
 router.use(authenticate);
 
-router.post("/", addTrip);        // Log a real trip
-router.get("/", getTrips);        // Fetch user's trips
-router.get("/summary", getTripSummary); // Get total stats
+// Core routes
+router.post("/", addTrip);
+router.get("/", getTrips);
+router.get("/summary", getTripSummary);
+
+// Phase 1C routes
+router.get("/filter", filterTrips);
+router.delete("/all", deleteAllTrips);
+router.get("/export", exportTrips);
 
 export default router;
