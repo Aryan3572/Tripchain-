@@ -1,0 +1,37 @@
+.navbar {
+  height: 70px;
+  backdrop-filter: blur(12px);
+  background: var(--glass-bg);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 35px;
+  box-shadow: var(--shadow);
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.nav-links a {
+  margin-right: 18px;
+  color: white;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
+
+.logout-btn {
+  padding: 8px 18px;
+  background: #ff6b6b;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
