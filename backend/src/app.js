@@ -1,3 +1,4 @@
+// src/app.js
 import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
@@ -11,43 +12,28 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 import goalRoutes from "./routes/goalRoutes.js";
 import predictionRoutes from "./routes/predictionRoutes.js";
 
-
 const app = express();
 
-// Global middlewares
 app.use(cors());
 app.use(express.json());
 
-// Root route
 app.get("/", (req, res) => res.json({ message: "🚀 Tripchain API is live!" }));
 
-// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/trips", tripRoutes);
+app.use("/api/trip-insights", tripInsightRoutes);
+app.use("/api/eco-score", ecoScoreRoutes);
+app.use("/api/achievements", achievementRoutes);
+app.use("/api/trips/patterns", patternRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/goals", goalRoutes);
+app.use("/api/predictions", predictionRoutes);
 
-// Optional: Global error handler (future use)
+// Global error handler LAST
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);
   res.status(500).json({ success: false, message: "Internal Server Error" });
 });
-
-app.use("/api/trips", tripRoutes);         // existing CRUD
-app.use("/api/trip-insights", tripInsightRoutes); // new analytics
-
-app.use("/api/eco-score", ecoScoreRoutes);//new eco-score calculation
-
-
-app.use("/api/achievements", achievementRoutes); // new achievements
-
-app.use("/api/trips/patterns", patternRoutes); //new travel pattern detection
-
-app.use("/api/notifications", notificationRoutes);//new notifications
-
-app.use("/api/dashboard", dashboardRoutes);
-
-app.use("/api/goals", goalRoutes); //new goal setting
-
-app.use("/api/predictions", predictionRoutes); //new trip predictions
-
 
 export default app;
