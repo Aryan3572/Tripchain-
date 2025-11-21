@@ -1,83 +1,84 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { apiRequest } from "../api/api";
 
-export default function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
 
-  const validateEmail = (val) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setError("");
-
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-
-    if (!password) {
-      setError("Password is required.");
-      return;
-    }
-
+    setErrorMsg("");
+    setLoading(true);
     try {
-      const res = await apiRequest("/api/auth/login", "POST", { email, password });
-      if (res.token) {
-        localStorage.setItem("token", res.token);
+      const data = await apiRequest("/api/auth/login", "POST", {
+        email,
+        password,
+      });
+      if (data.token) {
+        localStorage.setItem("tripchain_token", data.token);
+        localStorage.setItem("tripchain_userEmail", email);
         navigate("/");
       } else {
-        setError("Unexpected response from server.");
+        setErrorMsg("No token returned from server.");
       }
     } catch (err) {
-      setError(err.message || "Login failed");
+      setErrorMsg(err.message || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <div className="auth-header">
-          <h1 className="brand-title">Tripchain</h1>
-          <p className="auth-subtitle">Welcome back! Log in to continue your journey 🌍</p>
-        </div>
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input
-            type="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="input"
-          />
+    <div className="auth-wrapper">
+      <div className="auth-card glass-card">
+        <h1 className="auth-title">
+          Welcome back to <span>Tripchain</span>
+        </h1>
+        <p className="auth-subtitle">
+          Log in to see your trips, insights, badges and eco score 🌱
+        </p>
 
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="input"
-          />
+        <form className="auth-form" onSubmit={handleLogin}>
+          <label>
+            Email
+            <input
+              type="email"
+              required
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
 
-          {error && <p className="error-text">{error}</p>}
+          <label>
+            Password
+            <input
+              type="password"
+              required
+              minLength={6}
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
 
-          <button type="submit" className="btn-primary">
-            Login
+          {errorMsg && <div className="error-text">{errorMsg}</div>}
+
+          <button className="btn-primary full-width" type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Log in"}
           </button>
-
-          <p className="auth-footer-text">
-            Don&apos;t have an account?{" "}
-            <Link to="/signup" className="link">
-              Sign up
-            </Link>
-          </p>
         </form>
+
+        <div className="auth-footer">
+          New to Tripchain? <Link to="/signup">Create an account</Link>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default Login;

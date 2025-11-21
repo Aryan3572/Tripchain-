@@ -1,41 +1,63 @@
 import React, { useEffect, useState } from "react";
 import { apiRequest } from "../api/api";
 
-export default function Dashboard() {
+const Dashboard = () => {
   const [overview, setOverview] = useState(null);
+  const [ecoScore, setEcoScore] = useState(null);
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     (async () => {
       try {
-        const data = await apiRequest("/api/dashboard/overview", "GET");
-        setOverview(data.overview || data);
+        const o = await apiRequest("/api/dashboard/overview");
+        setOverview(o.overview || null);
+
+        const e = await apiRequest("/api/eco-score");
+        setEcoScore(e.ecoScore ?? null);
+
+        const n = await apiRequest("/api/notifications");
+        setNotifications(n.notifications || []);
       } catch (err) {
-        console.error(err);
+        console.error("Dashboard error:", err.message);
       }
     })();
   }, []);
 
-  if (!overview) {
-    return <div className="page-container">Loading dashboard...</div>;
-  }
-
   return (
-    <div className="page-container">
-      <h2 className="page-title">Tripchain Overview</h2>
-      <div className="card-list">
-        <div className="card hover-card">
-          <h3>Total Trips</h3>
-          <p className="big-number">{overview.totalTrips}</p>
+    <div className="page-wrapper">
+      <div className="page-header">
+        <h2>Tripchain Overview</h2>
+        <p>See how accurate and eco-friendly your travel habits are.</p>
+      </div>
+
+      <div className="grid-3">
+        <div className="stat-card glass-card">
+          <h4>Total Trips</h4>
+          <p className="stat-value">{overview?.totalTrips ?? 0}</p>
         </div>
-        <div className="card hover-card">
-          <h3>Total Distance</h3>
-          <p className="big-number">{overview.totalDistance} km</p>
+        <div className="stat-card glass-card">
+          <h4>Total Distance</h4>
+          <p className="stat-value">{overview?.totalDistance ?? 0} km</p>
         </div>
-        <div className="card hover-card">
-          <h3>Eco Score</h3>
-          <p className="big-number">{overview.ecoScore}</p>
+        <div className="stat-card glass-card">
+          <h4>Eco Score</h4>
+          <p className="stat-value accent">{ecoScore ?? overview?.ecoScore ?? 0}</p>
         </div>
       </div>
+
+      <section className="section-card glass-card">
+        <h3>Notifications & Tips</h3>
+        {notifications.length === 0 && <p>No notifications yet. Keep traveling!</p>}
+        <ul className="notifications-list">
+          {notifications.map((n, idx) => (
+            <li key={idx} className={`notif-pill notif-${n.type || "info"}`}>
+              {n.message}
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
-}
+};
+
+export default Dashboard;

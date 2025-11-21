@@ -1,0 +1,57 @@
+.profile-container {
+  padding: 30px;
+  color: white;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.profile-card,
+.eco-card,
+.badges-card,
+.coupons-card,
+.achievements-card,
+.patterns-card,
+.modes-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: 0.2s;
+}
+
+.profile-card:hover,
+.eco-card:hover,
+.badges-card:hover,
+.coupons-card:hover,
+.achievements-card:hover,
+.patterns-card:hover,
+.modes-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+}
+
+.eco-score-number {
+  font-size: 48px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #22c55e, #38bdf8);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.coupon {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+  border-left: 4px solid #38bdf8;
+}
+
+.coupon h4 {
+  margin: 0 0 5px 0;
+  color: #38bdf8;
+}

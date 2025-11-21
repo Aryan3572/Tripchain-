@@ -1,81 +1,40 @@
 import React from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
-import Trips from "./pages/Trips";
 import AddTrip from "./pages/AddTrip";
-import Summary from "./pages/Summary";
 import Profile from "./pages/Profile";
-import Navbar from "./components/Navbar";
+import Achievements from "./pages/Achievements";
+import Insights from "./pages/Insights";
 
-function PrivateRoute({ children }) {
-  const token = localStorage.getItem("token");
-  return token ? children : <Navigate to="/login" />;
-}
-
-function Layout({ children }) {
-  const location = useLocation();
-  const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+function App() {
+  const token = localStorage.getItem("tripchain_token");
 
   return (
-    <>
-      {!isAuthPage && <Navbar />}
-      {children}
-    </>
+    <div className="app-root">
+      <Navbar />
+      <main className="app-main">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+
+          {token ? (
+            <>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/add-trip" element={<AddTrip />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/achievements" element={<Achievements />} />
+              <Route path="/insights" element={<Insights />} />
+            </>
+          ) : (
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          )}
+        </Routes>
+      </main>
+    </div>
   );
 }
 
-export default function App() {
-  return (
-    <Layout>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/trips"
-          element={
-            <PrivateRoute>
-              <Trips />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/trips/add"
-          element={
-            <PrivateRoute>
-              <AddTrip />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/summary"
-          element={
-            <PrivateRoute>
-              <Summary />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <PrivateRoute>
-              <Profile />
-            </PrivateRoute>
-          }
-        />
-
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </Layout>
-  );
-}
+export default App;
