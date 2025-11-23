@@ -1,0 +1,18 @@
+body.strong-glass {
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-blur: 28px;
+  --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.7);
+  --glow: 0 0 18px rgba(99, 102, 241, 0.8);
+  --text-color: #ffffff;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glow);
+  backdrop-filter: blur(var(--glass-blur));
+  border-radius: 20px;
+  padding: 24px;
+  transition: all 0.45s ease;
+}

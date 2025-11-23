@@ -1,0 +1,17 @@
+body.light-glass {
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-blur: 10px;
+  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --text-color: #ffffff;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur));
+  border-radius: 18px;
+  padding: 20px;
+  transition: all 0.4s ease;
+}

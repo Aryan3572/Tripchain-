@@ -1,39 +1,51 @@
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { initThemeEngine } from "./theme/themeEngine";
+
 import Navbar from "./components/Navbar";
+import ThemeToggle from "./components/ThemeToggle";
+
+import Dashboard from "./pages/Dashboard";
+import RoutePlanner from "./pages/RoutePlanner";
+import Insights from "./pages/Insights";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Dashboard from "./pages/Dashboard";
-import AddTrip from "./pages/AddTrip";
 import Profile from "./pages/Profile";
 import Achievements from "./pages/Achievements";
-import Insights from "./pages/Insights";
+import AddTrip from "./pages/AddTrip";
+
+import "./styles/animations.css";
+import "./theme/light.css";
+import "./theme/medium.css";
+import "./theme/strong.css";
+import "./index.css";
 
 function App() {
-  const token = localStorage.getItem("tripchain_token");
+  useEffect(() => {
+    initThemeEngine();
+  }, []);
 
   return (
-    <div className="app-root">
+    <BrowserRouter>
       <Navbar />
-      <main className="app-main">
+      <ThemeToggle />
+
+      <div className="app-container">
         <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/planner" element={<RoutePlanner />} />
+          <Route path="/inights" element={<Insights />} />
+          <Route path="/add-trip" element={<AddTrip />} />
+          <Route path="/achievements" element={<Achievements />} />
+          <Route path="/profile" element={<Profile />} />
+
+          {/* Auth */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-
-          {token ? (
-            <>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/add-trip" element={<AddTrip />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/achievements" element={<Achievements />} />
-              <Route path="/insights" element={<Insights />} />
-            </>
-          ) : (
-            <Route path="*" element={<Navigate to="/login" replace />} />
-          )}
+          <Route path="/insights" element={<Insights />} />
         </Routes>
-      </main>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
