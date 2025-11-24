@@ -1,4 +1,8 @@
-const API_BASE = process.env.REACT_APP_API_BASE || "http://localhost:5000";
+// const API_BASE = process.env.REACT_APP_API_BASE || "http://localhost:5000";
+
+const API_BASE =
+  process.env.REACT_APP_API_BASE ||
+  "https://tripchain-backend.onrender.com";
 
 export async function apiRequest(path, method = "GET", body) {
   const token = localStorage.getItem("tripchain_token");
