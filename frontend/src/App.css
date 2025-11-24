@@ -166,7 +166,7 @@
   width: 100%;
   min-height: 100vh;
   box-sizing: border-box;
-  padding-top: 0; /* reset */
+  padding-top: 90px; /* reset */
 }
 
 /* DO NOT DEFINE NAVBAR HERE — NAVBAR.CSS will manage it */
