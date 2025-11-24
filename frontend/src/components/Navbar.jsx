@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import "../styles/navbar.css";
 
 const Navbar = () => {
   const token = localStorage.getItem("tripchain_token");

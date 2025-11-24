@@ -34,7 +34,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/planner" element={<RoutePlanner />} />
-          <Route path="/inights" element={<Insights />} />
+          <Route path="/insights" element={<Insights />} />
           <Route path="/add-trip" element={<AddTrip />} />
           <Route path="/achievements" element={<Achievements />} />
           <Route path="/profile" element={<Profile />} />
