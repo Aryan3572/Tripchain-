@@ -170,3 +170,11 @@
 }
 
 /* DO NOT DEFINE NAVBAR HERE — NAVBAR.CSS will manage it */
+/* FIX LOGIN & SIGNUP ALIGNMENT */
+.auth-wrapper {
+  min-height: calc(100vh - 90px); /* adjust for navbar + spacing */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
