@@ -1,3 +1,4 @@
+/* NAVBAR MAIN */
 .navbar {
   height: 70px;
   backdrop-filter: blur(12px);
@@ -6,32 +7,72 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 35px;
+  padding: 0 20px;
   box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.logo {
-  font-size: 28px;
+/* LOGO */
+.logo-text {
+  font-size: 26px;
   font-weight: 700;
+  cursor: pointer;
+}
+.logo-text span {
+  color: #4fe7c4;
 }
 
-.nav-links a {
-  margin-right: 18px;
+/* DESKTOP NAV LINKS */
+.navbar-links {
+  display: flex;
+  gap: 18px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* all links */
+.navbar-links a {
   color: white;
   text-decoration: none;
-  opacity: 0.8;
-  transition: 0.3s;
+  opacity: 0.85;
+  transition: 0.25s;
 }
 
-.nav-links a:hover {
+.navbar-links a:hover {
   opacity: 1;
 }
 
-.logout-btn {
-  padding: 8px 18px;
-  background: #ff6b6b;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
+/* RIGHT SIDE */
+.navbar-right {
+  display: flex;
+  gap: 12px;
+}
+
+/* ===== MOBILE RESPONSIVE FIX ===== */
+
+@media (max-width: 700px) {
+  .navbar {
+    padding: 0 10px;
+  }
+
+  /* scrollable navbar */
+  .navbar-links {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .navbar-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navbar-right {
+    display: none; /* optional: hide login/logout if needed */
+  }
+
+  .logo-text {
+    font-size: 20px;
+  }
 }

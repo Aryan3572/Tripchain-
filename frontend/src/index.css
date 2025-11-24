@@ -199,3 +199,31 @@ html, body {
   cursor: pointer;
   width: 100%;
 }
+/* MOBILE FIX: Navbar scroll */
+.navbar-links {
+  display: flex;
+  gap: 18px;
+  font-size: 14px;
+  overflow-x: auto;       /* allow horizontal scroll */
+  white-space: nowrap;    /* prevent links from wrapping awkwardly */
+  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+}
+
+.navbar-links::-webkit-scrollbar {
+  display: none; /* hide scrollbar */
+}
+
+/* Mobile layout improvements */
+@media (max-width: 600px) {
+  .navbar {
+    padding: 0 10px;
+  }
+
+  .navbar-right {
+    display: none;  /* hide login/logout on small screens (optional) */
+  }
+
+  .logo-text {
+    font-size: 18px;
+  }
+}
