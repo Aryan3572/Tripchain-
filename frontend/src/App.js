@@ -20,9 +20,22 @@ import "./theme/medium.css";
 import "./theme/strong.css";
 import "./index.css";
 
+const isMobile = () => window.innerWidth <= 700;
+
 function App() {
   useEffect(() => {
     initThemeEngine();
+    useEffect(() => {
+  initThemeEngine();
+
+  // redirect mobile users if not logged in
+  const token = localStorage.getItem("tripchain_token");
+
+  if (isMobile() && !token) {
+    window.location.href = "/login";
+  }
+}, []);
+
   }, []);
 
   return (
@@ -32,7 +45,8 @@ function App() {
 
       <div className="app-container">
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/planner" element={<RoutePlanner />} />
           <Route path="/insights" element={<Insights />} />
           <Route path="/add-trip" element={<AddTrip />} />

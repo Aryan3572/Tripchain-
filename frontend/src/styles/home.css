@@ -1,0 +1,43 @@
+.home-wrapper {
+  padding-top: 90px;
+  text-align: center;
+}
+
+.home-title {
+  font-size: 32px;
+  font-weight: 700;
+}
+.home-title span {
+  color: #4fe7c4;
+}
+
+.home-subtitle {
+  margin-top: 6px;
+  color: rgba(255,255,255,0.6);
+}
+
+.home-grid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.home-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 18px;
+  padding: 22px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.home-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.1);
+}
+
+.home-emoji {
+  font-size: 32px;
+}

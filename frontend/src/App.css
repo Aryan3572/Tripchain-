@@ -212,3 +212,80 @@
   min-height: 100vh;
   box-sizing: border-box;
 }
+/* TWO-PANEL AUTH LAYOUT */
+.auth-panel {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(160deg, #0b0e11, #111827 60%);
+}
+
+/* LEFT INFO SECTION */
+.auth-info {
+  flex: 1.1;
+  padding: 60px 50px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: transparent;
+}
+
+.auth-info h1 {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.auth-info p {
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.auth-info ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.auth-info li {
+  margin-bottom: 8px;
+}
+
+/* RIGHT LOGIN CARD */
+.auth-card {
+  flex: 1;
+  padding: 40px 34px;
+  margin: auto;
+  max-width: 420px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 22px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+}
+
+/* MOBILE VERSION – stack vertically */
+@media (max-width: 800px) {
+  .auth-panel {
+    flex-direction: column;
+    padding-top: 80px; /* adjust below navbar */
+  }
+
+  .auth-info {
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .auth-card {
+    margin-top: 10px;
+    max-width: 90%;
+  }
+}
+
