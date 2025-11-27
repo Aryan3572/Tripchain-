@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { initThemeEngine } from "./theme/themeEngine";
 
 import Navbar from "./components/Navbar";
@@ -20,44 +20,54 @@ import "./theme/medium.css";
 import "./theme/strong.css";
 import "./index.css";
 
-// Detect mobile
 const isMobile = () => window.innerWidth <= 700;
 
-function App() {
+// 🔥 Wrapper component to handle mobile redirect safely
+function MobileRedirectWrapper({ children }) {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // SINGLE CLEAN useEffect
   useEffect(() => {
-    initThemeEngine();
-
     const token = localStorage.getItem("tripchain_token");
 
-    // redirect only mobile users without login
-    if (isMobile() && !token) {
-      window.location.href = "/login";
+    const onAuthPage =
+      location.pathname === "/login" || location.pathname === "/signup";
+
+    // Redirect only if mobile + user not logged in + not already on login/signup
+    if (isMobile() && !token && !onAuthPage) {
+      navigate("/login", { replace: true });
     }
+  }, [location]);
+
+  return children;
+}
+
+function App() {
+  useEffect(() => {
+    initThemeEngine();
   }, []);
 
   return (
     <BrowserRouter>
-      <Navbar />
-      <ThemeToggle />
+      <MobileRedirectWrapper>
+        <Navbar />
+        <ThemeToggle />
 
-      <div className="app-container">
-        <Routes>
-          {/* Dashboard is your home screen */}
-          <Route path="/" element={<Dashboard />} />
+        <div className="app-container">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/planner" element={<RoutePlanner />} />
+            <Route path="/insights" element={<Insights />} />
+            <Route path="/add-trip" element={<AddTrip />} />
+            <Route path="/achievements" element={<Achievements />} />
+            <Route path="/profile" element={<Profile />} />
 
-          <Route path="/planner" element={<RoutePlanner />} />
-          <Route path="/insights" element={<Insights />} />
-          <Route path="/add-trip" element={<AddTrip />} />
-          <Route path="/achievements" element={<Achievements />} />
-          <Route path="/profile" element={<Profile />} />
-
-          {/* Auth */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </div>
+            {/* Auth */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </div>
+      </MobileRedirectWrapper>
     </BrowserRouter>
   );
 }
