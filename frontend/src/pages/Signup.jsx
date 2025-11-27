@@ -14,30 +14,22 @@ const Signup = () => {
     e.preventDefault();
     setMsg("");
     setLoading(true);
+
     try {
-      await apiRequest("/api/auth/register", "POST", {
-        name,
-        email,
-        password,
-      });
-      setMsg("Account created! You can now log in.");
+      await apiRequest("/api/auth/register", "POST", { name, email, password });
+      setMsg("Account created! Redirecting...");
       setTimeout(() => navigate("/login"), 1200);
     } catch (err) {
       setMsg(err.message || "Signup failed");
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return (
     <div className="auth-wrapper">
-      <div className="auth-card glass-card">
-        <h1 className="auth-title">
-          Join <span>Tripchain</span>
-        </h1>
-        <p className="auth-subtitle">
-          Start tracking your daily journeys and unlock eco achievements.
-        </p>
+      <div className="auth-card">
+        <h1 className="auth-title">Create your account 🚀</h1>
+        <p className="auth-subtitle">Join Tripchain and start tracking your journeys.</p>
 
         <form className="auth-form" onSubmit={handleSignup}>
           <label>
@@ -45,7 +37,6 @@ const Signup = () => {
             <input
               type="text"
               required
-              minLength={2}
               placeholder="Aryan Raj"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -78,7 +69,7 @@ const Signup = () => {
           {msg && <div className="info-text">{msg}</div>}
 
           <button className="btn-primary full-width" type="submit" disabled={loading}>
-            {loading ? "Creating account..." : "Sign up"}
+            {loading ? "Creating..." : "Sign up"}
           </button>
         </form>
 

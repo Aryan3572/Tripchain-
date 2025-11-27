@@ -1,4 +1,4 @@
-/* full-screen centered auth */
+/* full-screen centered auth
 .auth-wrapper {
   width: 100%;
   display: flex;
@@ -7,7 +7,7 @@
 }
 
 /* beautiful card */
-.auth-card {
+/* .auth-card {
   backdrop-filter: blur(18px);
   background: rgba(18, 22, 40, 0.85);
   border: 1px solid rgba(255,255,255,0.12);
@@ -15,10 +15,10 @@
   border-radius: 20px;
   max-width: 420px;
   width: 100%;
-}
+} */
 
 /* inputs */
-.auth-card input {
+/* .auth-card input {
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.25);
   color: white;
@@ -31,17 +31,17 @@
   border-color: #4fe7c4;
   outline: none;
   box-shadow: 0 0 0 2px rgba(79,231,196,0.25);
-}
+} */
 
 /* footer */
-.auth-footer {
+/* .auth-footer {
   margin-top: 18px;
   text-align: center;
-}
+} */
 
 /* mobile */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .auth-card {
     padding: 30px 22px;
   }
-}
+} */ */

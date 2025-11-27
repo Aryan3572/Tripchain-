@@ -14,33 +14,21 @@ const Login = () => {
     setErrorMsg("");
     setLoading(true);
     try {
-      const data = await apiRequest("/api/auth/login", "POST", {
-        email,
-        password,
-      });
-      if (data.token) {
-        localStorage.setItem("tripchain_token", data.token);
-        localStorage.setItem("tripchain_userEmail", email);
-        navigate("/");
-      } else {
-        setErrorMsg("No token returned from server.");
-      }
+      const data = await apiRequest("/api/auth/login", "POST", { email, password });
+      localStorage.setItem("tripchain_token", data.token);
+      localStorage.setItem("tripchain_userEmail", email);
+      navigate("/");
     } catch (err) {
       setErrorMsg(err.message || "Login failed");
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return (
     <div className="auth-wrapper">
-      <div className="auth-card glass-card">
-        <h1 className="auth-title">
-          Welcome back to <span>Tripchain</span>
-        </h1>
-        <p className="auth-subtitle">
-          Log in to see your trips, insights, badges and eco score 🌱
-        </p>
+      <div className="auth-card">
+        <h1 className="auth-title">Welcome back <span>👋</span></h1>
+        <p className="auth-subtitle">Log in to your travel dashboard</p>
 
         <form className="auth-form" onSubmit={handleLogin}>
           <label>
@@ -59,8 +47,8 @@ const Login = () => {
             <input
               type="password"
               required
-              minLength={6}
               placeholder="••••••••"
+              minLength={6}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
