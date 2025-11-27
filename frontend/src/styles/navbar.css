@@ -1,4 +1,4 @@
-/* NAVBAR MAIN */
+/* MAIN NAVBAR */
 .navbar {
   height: 70px;
   position: fixed;
@@ -24,33 +24,27 @@
   color: #4fe7c4;
 }
 
-/* DESKTOP NAV LINKS */
-.navbar-links {
+/* DESKTOP NAV */
+.desktop-nav {
   display: flex;
+  align-items: center;
   gap: 18px;
-  font-size: 14px;
-  white-space: nowrap;
 }
+
 .navbar-links a {
   color: white;
   opacity: 0.85;
-  padding: 4px 8px;
+  padding: 6px 10px;
   text-decoration: none;
   transition: 0.25s;
+  border-radius: 8px;
 }
 .navbar-links a:hover {
   opacity: 1;
   background: rgba(255,255,255,0.08);
-  border-radius: 8px;
 }
 
-/* RIGHT SIDE */
-.navbar-right {
-  display: flex;
-  gap: 12px;
-}
-
-/* BUTTONS */
+/* BUTTON STYLES */
 .btn-outline {
   background: transparent;
   color: white;
@@ -77,20 +71,64 @@
   filter: brightness(1.1);
 }
 
-/* MOBILE FIXES */
+/* HAMBURGER BUTTON (Mobile only) */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* MOBILE MENU DROPDOWN */
+.mobile-menu {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background: rgba(10, 10, 14, 0.95);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  animation: fadeIn 0.25s ease;
+}
+
+.mobile-menu a {
+  color: white;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.06);
+}
+
+.mobile-auth {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* MOBILE RESPONSIVE */
 @media (max-width: 700px) {
-  .navbar-links {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+
+  .desktop-nav {
+    display: none; /* Hide desktop navbar */
   }
-  .navbar-links::-webkit-scrollbar {
-    display: none;
+
+  .hamburger {
+    display: block;
   }
-  .navbar-right {
-    display: none;
-  }
+
   .logo-text {
-    font-size: 20px;
+    font-size: 22px;
   }
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
