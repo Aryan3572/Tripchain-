@@ -20,22 +20,21 @@ import "./theme/medium.css";
 import "./theme/strong.css";
 import "./index.css";
 
+// Detect mobile
 const isMobile = () => window.innerWidth <= 700;
 
 function App() {
+
+  // SINGLE CLEAN useEffect
   useEffect(() => {
     initThemeEngine();
-    useEffect(() => {
-  initThemeEngine();
 
-  // redirect mobile users if not logged in
-  const token = localStorage.getItem("tripchain_token");
+    const token = localStorage.getItem("tripchain_token");
 
-  if (isMobile() && !token) {
-    window.location.href = "/login";
-  }
-}, []);
-
+    // redirect only mobile users without login
+    if (isMobile() && !token) {
+      window.location.href = "/login";
+    }
   }, []);
 
   return (
@@ -45,8 +44,9 @@ function App() {
 
       <div className="app-container">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          {/* Dashboard is your home screen */}
+          <Route path="/" element={<Dashboard />} />
+
           <Route path="/planner" element={<RoutePlanner />} />
           <Route path="/insights" element={<Insights />} />
           <Route path="/add-trip" element={<AddTrip />} />
@@ -56,7 +56,6 @@ function App() {
           {/* Auth */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/insights" element={<Insights />} />
         </Routes>
       </div>
     </BrowserRouter>
