@@ -94,17 +94,35 @@
 }
 
 /* AUTH */
+/* ===== AUTH PAGES FIX ===== */
+
 .auth-wrapper {
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 80px); /* below navbar */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 20px;
 }
 
 .auth-card {
-  max-width: 420px;
   width: 100%;
+  max-width: 420px;
+  padding: 30px 28px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(21, 28, 58, 0.95), rgba(8, 10, 25, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+}
+
+.auth-card input,
+.auth-card select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(3, 5, 18, 0.9);
+  color: #fff;
+  margin-top: 6px;
 }
 
 /* FORMS */
