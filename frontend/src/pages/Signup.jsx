@@ -28,7 +28,7 @@ const Signup = () => {
   return (
     <div className="auth-wrapper">
       <div className="auth-card">
-        <h1 className="auth-title">Create your account 🚀</h1>
+        <h1 className="auth-title">Create your account</h1>
         <p className="auth-subtitle">Join Tripchain and start tracking your journeys.</p>
 
         <form className="auth-form" onSubmit={handleSignup}>

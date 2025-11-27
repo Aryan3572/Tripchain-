@@ -204,3 +204,11 @@
     font-size: 28px;
   }
 }
+
+/* Ensures all pages start BELOW the navbar */
+.app-container {
+  padding-top: 90px;   /* navbar height */
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
