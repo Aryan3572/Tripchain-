@@ -70,65 +70,43 @@
 .btn-primary:hover {
   filter: brightness(1.1);
 }
-
-/* HAMBURGER BUTTON (Mobile only) */
-.hamburger {
-  display: none;
-  font-size: 26px;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
-/* MOBILE MENU DROPDOWN */
-.mobile-menu {
-  position: fixed;
-  top: 70px;
-  left: 0;
-  width: 100%;
-  background: rgba(10, 10, 14, 0.95);
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  animation: fadeIn 0.25s ease;
-}
-
-.mobile-menu a {
-  color: white;
-  font-size: 16px;
-  padding: 10px;
-  border-radius: 6px;
-  background: rgba(255,255,255,0.06);
-}
-
-.mobile-auth {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* MOBILE RESPONSIVE */
+/* MOBILE FIXES */
 @media (max-width: 700px) {
 
-  .desktop-nav {
-    display: none; /* Hide desktop navbar */
+  /* Navbar becomes TALL instead of wide */
+  .navbar {
+    height: auto;
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
   }
 
-  .hamburger {
-    display: block;
+  /* Vertical nav menu */
+  .navbar-links {
+    display: flex;
+    flex-direction: column;   /* THIS MAKES IT VERTICAL */
+    gap: 12px;
+    width: 100%;
+  }
+
+  .navbar-links a {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    font-size: 15px;
+    opacity: 1;
+  }
+
+  /* Hide login/signup or keep — your choice */
+  .navbar-right {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 
   .logo-text {
     font-size: 22px;
   }
-}
-
-/* ANIMATION */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
